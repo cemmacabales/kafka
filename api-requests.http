@@ -1,0 +1,33 @@
+### 1. Publish Order to Producer (Kafka)
+# Run this first to send data to the system.
+# Note: Ensure all services (zookeeper, kafka, producer, consumer, inventory) are running.
+POST http://localhost:9080/api/v1/kafka/publish
+Content-Type: application/json
+
+{
+    "customerName": "John Doe",
+    "items": [
+        {
+            "productId": 101,
+            "itemName": "Laptop",
+            "quantity": 1,
+            "price": 1000,
+            "uom": "Unit"
+        },
+        {
+            "productId": 102,
+            "itemName": "Mouse",
+            "quantity": 2,
+            "price": 20,
+            "uom": "Unit"
+        }
+    ]
+}
+
+### 2. View All Orders (Consumer Service)
+# This retrieves data from the Consumer's H2 database.
+GET http://localhost:8080/api/orders
+
+### 3. View All Inventory (Inventory Service)
+# This retrieves data from the Inventory Service's H2 database.
+GET http://localhost:8081/api/inventory

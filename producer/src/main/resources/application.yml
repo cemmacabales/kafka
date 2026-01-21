@@ -1,0 +1,40 @@
+server:
+   port: 9080
+spring:
+   datasource:
+      url: jdbc:h2:mem:producerdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+   jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      defer-datasource-initialization: true
+      hibernate:
+         ddl-auto: update
+   h2:
+      console:
+         enabled: true
+         path: /h2-console
+   servlet: 
+      multipart: 
+         enabled: true
+         file-size-threshold: 2KB
+         max-file-size: 200MB
+         max-request-size: 215MB
+   http: 
+      multipart: 
+         enabled: true
+         location: upload
+   kafka:
+      bootstrap-servers: localhost:9092
+      producer:
+         key-serializer: org.apache.kafka.common.serialization.StringSerializer
+         value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+file: 
+   upload: 
+      location: ..\\upload-dir
+logging: 
+   level: 
+      com: 
+         gabriel: 
+            pricems: TRACE
