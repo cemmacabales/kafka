@@ -1,4 +1,4 @@
-services:
+gservices:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     container_name: zookeeper
