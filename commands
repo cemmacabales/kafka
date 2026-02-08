@@ -1,0 +1,47 @@
+
+
+## run docker
+docker-compose down
+docker-compose up -d
+docker ps	
+mvn clean install -DskipTests 
+## run services mvn spring-boot:run -pl consumer
+mvn spring-boot:run -pl producer mvn spring-boot:run -pl inventory-service  ## to add in database
+curl -X POST http://localhost:9080/api/v1/kafka/publish \
+-H "Content-Type: application/json" \
+-d '{
+    "customerName": “test”,
+    "items": [
+        {
+            "productId": 101,
+            "itemName": "Laptop",
+            "quantity": 1,
+            "price": 1000,
+            "uom": "Unit"
+        },
+        {
+            "productId": 102,
+            "itemName": "Mouse",
+            "quantity": 2,
+            "price": 20,
+            "uom": "Unit"
+        }
+    ]
+}'
+
+
+## to check database
+docker exec -it mysql mysql -uroot -proot -D pss_db -e "SELECT * FROM orders;"
+docker exec -it mysql mysql -uroot -proot -D pss_db -e "SELECT * FROM items;" docker exec -it mysql mysql -uroot -proot -D pss_db -e "SELECT * FROM inventory;"
+
+
+curl -X DELETE http://localhost:8081/api/inventory/101
+
+
+
+
+
+
+
+
+ 
